@@ -8,7 +8,7 @@ object TestHitBox {
     println(hb1.cx)
     
     val hb3 = new HitBox()
-    val hb4 = new HitBox(3, 0, 1, 0.5)
+    val hb4 = new HitBox(1.1, 1, 1, 1)
     println(hb3.intersects(hb4))
     
     val hb5 = new HitBox
