@@ -13,7 +13,7 @@ object Sorts extends App {
     }
   }
   
-  val nums = Array.fill(10)(math.random())
+  val nums = Array.fill(10)(math.random()*100)
   println(nums.mkString(", "))
   bubbleSort(nums)(_>_)
   println(nums.mkString(", "))

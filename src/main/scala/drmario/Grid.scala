@@ -7,8 +7,8 @@ class Grid {
     }).toList
   }
   
-  private var currentPill: Pill = ???
-  private var nextPill: Pill = ???
+  private var currentPill: Pill = new Pill
+  private var nextPill: Pill = null
   
   def blocks(): List[Block] = {
     currentPill.blocks ++ entities.flatMap(_.blocks) //.flatten //takes a 2d list and makes it 1d

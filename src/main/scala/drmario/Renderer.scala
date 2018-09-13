@@ -6,6 +6,7 @@ import scalafx.scene.paint.Color
 
 class Renderer (gc: GraphicsContext) {
   val blockSize = 50
+  
   def render(grid: Grid): Unit = {
     gc.fill = Color.Black
     gc.fillRect(0, 0, gc.canvas.width(), gc.canvas.height())
@@ -19,9 +20,9 @@ class Renderer (gc: GraphicsContext) {
       }
       block match {
         case v:Virus =>
-          gc.fillOval(block.x*blockSize, block.y*blockSize, blockSize, blockSize)
+          gc.fillOval(v.x*blockSize, v.y*blockSize, blockSize, blockSize)
         case pp:PillPiece =>
-          gc.fillRect(block.x*blockSize, block.y*blockSize, blockSize, blockSize)
+          gc.fillRect(pp.x*blockSize, pp.y*blockSize, blockSize, blockSize)
       }
     }
   }
