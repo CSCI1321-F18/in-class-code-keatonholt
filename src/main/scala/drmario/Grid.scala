@@ -9,12 +9,36 @@ class Grid {
   
   private var currentPill: Pill = new Pill
   private var nextPill: Pill = null
+  val dropInterval = 1.0
+  private var dropDelay = 0.0
+  
+  private var leftHeld = false
+  private var rightHeld = false
+  
+  def leftPressed() = leftHeld = true
+  def rightPressed() = rightHeld = true
+  def leftReleased() = leftHeld = false
+  def rightReleased() = rightHeld = false
   
   def blocks(): List[Block] = {
     currentPill.blocks ++ entities.flatMap(_.blocks) //.flatten //takes a 2d list and makes it 1d
   }
   
-  def currentPieceFalls(): Unit = {
+  private def currentPieceFalls(): Unit = {
     currentPill.move(0,1)
+  }
+  
+  private def movePill(dx:Int, dy:Int): Unit = {
+    currentPill.move(dx,dy)
+  }
+  
+  def update(delay: Double): Unit = { //grid should keep track of timing
+    dropDelay += delay
+    if(dropDelay >= dropInterval) {
+      currentPieceFalls()
+      dropDelay = 0.0 
+    }
+    if (leftHeld) currentPill.move(-1,0)
+    if (rightHeld) currentPill.move(1,0)
   }
 }
