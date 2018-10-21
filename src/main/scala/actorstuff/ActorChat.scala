@@ -14,13 +14,13 @@ object ActorChat extends App {
   val ss = new ServerSocket(4040)
   while(true) {
     val sock = ss.accept()
-    Future{
-      val ps = new PrintStream(sock.getOutputStream) //this way its lines not bytes
-      val br = new BufferedReader(new InputStreamReader(sock.getInputStream))
-      ps.println("What is your name? ")
-      val name br.readLine()
-      chatManager ! chatManager.NewChatter(name, sock, ps, br)
-    }
+//    Future{
+//      val ps = new PrintStream(sock.getOutputStream) //this way its lines not bytes
+//      val br = new BufferedReader(new InputStreamReader(sock.getInputStream))
+//      ps.println("What is your name? ")
+//      val name br.readLine()
+//      chatManager ! chatManager.NewChatter(name, sock, ps, br)
+//    }
   }
   
 }
