@@ -36,7 +36,29 @@ class SLLBuffer[A] extends Buffer[A] {
     sz = 0
   }
   
-  def insertAll(n: Int, elems: Traversable[A]): Unit = ???
+  def insertAll(n: Int, elems: Traversable[A]): Unit = { //need to fix this one
+    require(n < length && n >= 0)
+    var rover:Node[A] = null
+    if(n!=0){
+      rover = hd
+      for(e <- elems) {
+        if(rover == null) {
+          hd = new Node(e, hd)
+          rover = hd
+        } else{
+          rover.pointer = new Node(e, rover.pointer)
+          rover = rover.pointer
+        }
+        sz += 1
+      }
+    } else {
+      var rover = hd 
+      for(_ <- 0 until n-1) rover = rover.pointer
+      val ret = rover.value
+      rover.pointer = rover.pointer.pointer
+      ret
+    } 
+  }
 
   def length: Int = sz
 
@@ -65,7 +87,15 @@ class SLLBuffer[A] extends Buffer[A] {
   }
 
   // Members declared in scala.collection.IterableLike
-  def iterator: Iterator[A] = ???
+  def iterator: Iterator[A] = new Iterator[A] {
+    private var rover = hd
+    def hasNext: Boolean = rover != null
+    def next(): A = {
+      val ret = rover.value
+      rover = rover.pointer
+      ret
+    }
+  }
 }
 
 object SLLBuffer {
